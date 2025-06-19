@@ -4,9 +4,10 @@ type Props = {
     event: EventItemType,
     onEdit: (event: EventItemType) => void,
     onDelete: (id: string) => void,
+    onViewDetails: (event: EventItemType) => void,
 }
 
-export default function EventItem ({event, onEdit, onDelete}: Props) {
+export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Props) {
     return (
         <div className='border rouded p-3 mb-2 bg-white shadow flex-col justify-center items-center'>
             <div>
@@ -38,6 +39,12 @@ export default function EventItem ({event, onEdit, onDelete}: Props) {
                     }}
                     className='mt-1 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600'>
                     Deletar
+                </button>
+                <button onClick={(e) => {
+                    e.stopPropagation();
+                    onViewDetails(event);
+                }} className='px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600'>
+                    Detalhes
                 </button>
             </div>
         </div>

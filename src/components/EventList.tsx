@@ -8,11 +8,13 @@ import EventFilters from "./EventFilters";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, type DragEndEvent, } from "@dnd-kit/core";
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy, } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import EventDetailsModal from './EventDetailsModal';
 
-function SortableEventItem({event, onEdit, onDelete}: {
+function SortableEventItem({event, onEdit, onDelete, onViewDetails}: {
   event: EventItemType;
   onEdit: (event: EventItemType) => void;
   onDelete: (ide: string) => void;
+  onViewDetails: (event: EventItemType) => void;
 }) {
   const {attributes, listeners, setNodeRef, transform, transition} = useSortable({
     id: event.id,
@@ -31,7 +33,7 @@ function SortableEventItem({event, onEdit, onDelete}: {
       
       {}
       <div className="flex-1">
-        <EventItem event={event} onEdit={onEdit} onDelete={onDelete} />
+        <EventItem event={event} onEdit={onEdit} onDelete={onDelete} onViewDetails={onViewDetails}/>
       </div>
     </div>
   );
@@ -42,10 +44,13 @@ export default function EventList() {
   const addEvent = useEventStore((state) => state.addEvent);
   const updateEvent = useEventStore((state) => state.updateEvent);
   const deleteEvent = useEventStore((state) => state.deleteEvent);
+  const [viewingEvent, setViewingEvent] = useState<EventItemType | null>(null);
 
   const [editingEvent, setEditingEvent] = useState<EventItemType | null>(null)
   const [showForm, setShowForm] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({});
+
+  const clearEvents = useEventStore((state) => state.clearEvents);
 
   function applyFilters(event: EventItemType): boolean {
     const {
@@ -199,6 +204,7 @@ export default function EventList() {
                 event={event}
                 onEdit={handleEdit}
                 onDelete={deleteEvent}
+                onViewDetails={setViewingEvent}
               />
             ))}
           </div>
@@ -218,6 +224,21 @@ export default function EventList() {
           className="hidden"
         />
       </label>
+
+      <button
+        onClick={() => {
+          if (confirm('Tem certeza que deseja apagar todos os eventos?')) {
+            clearEvents();
+          }
+        }}
+        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 ml-2"
+      >
+        Limpar Tudo
+      </button>
+
+      {viewingEvent && (
+        <EventDetailsModal event={viewingEvent} onClose={() => setViewingEvent(null)}/>
+      )}
     </div>
   )
 }

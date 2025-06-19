@@ -7,6 +7,7 @@ type EventStore = {
     addEvent: (event: EventItem) => void,
     deleteEvent: (id: string) => void,
     updateEvent: (event:EventItem) => void,
+    clearEvents: () => void,
 }
 
 export const useEventStore = create<EventStore>()(
@@ -19,6 +20,7 @@ export const useEventStore = create<EventStore>()(
         })),
       updateEvent: (event) => set((state) => ({events: state.events.map((e) => e.id === event.id ? event : e),
         })),
+      clearEvents: () => set({events: []}),
     }),
     {
       name: 'event-storage',
