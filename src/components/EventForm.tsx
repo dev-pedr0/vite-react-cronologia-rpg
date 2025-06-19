@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
-import type { EventItem } from "../models/Event"
+import { useEffect, useState } from "react";
+import type { EventItem } from "../models/Event";
+import { STANDARD_TAGS } from "../models/Tags";
+import CreatableSelect from "react-select/creatable";
 
 type Props = {
     onSave: (event: EventItem) => void,
@@ -7,12 +9,20 @@ type Props = {
     eventToEdit?: EventItem,
 }
 
+const tagOptions = STANDARD_TAGS.map(tag => ({
+    label: tag.label,
+    value: tag.value,
+}));
+
 export default function EventForm({onSave, onCancel, eventToEdit}: Props){
     const [startYear, setStartYear] = useState(eventToEdit?.startYear ?? 0);
     const [endYear, setEndYear] = useState(eventToEdit?.endYear ?? undefined);
     const [region, setRegion] = useState(eventToEdit?.region ?? '');
     const [description, setDescription] = useState(eventToEdit?.description ?? '');
-    const [tags, setTags] = useState(eventToEdit?.tags.join(', ') ?? '');
+
+    const [selectedTags, setSelectedTags] = useState<{ label: string, value: string }[]>(
+        eventToEdit?.tags.map(tag => ({ label: tag, value: tag})) ?? []
+    );
 
     useEffect(() => {
         if (eventToEdit) {
@@ -20,7 +30,7 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
         setEndYear(eventToEdit.endYear)
         setRegion(eventToEdit.region)
         setDescription(eventToEdit.description)
-        setTags(eventToEdit.tags.join(', '))
+        setSelectedTags(eventToEdit.tags.map(tag => ({ label: tag, value: tag})));
         }
     }, [eventToEdit]);
 
@@ -36,7 +46,7 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
             endYear: endYear || undefined,
             region,
             description,
-            tags: tags.split(',').map((t) => t.trim()).filter((t) => t.length > 0),
+            tags: selectedTags.map(t => t.value),
         }
         onSave(newEvent);
     }
@@ -82,12 +92,13 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
             </div>
 
             <div className="mb-2">
-                <label className="block font-semibold">Tags (separadas por vírgula)</label>
-                <input
-                type="text"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-                className="w-full border px-2 py-1 rounded"
+                <label className="block font-semibold mb-1">Tags</label>
+                <CreatableSelect
+                    isMulti
+                    options={tagOptions}
+                    value={selectedTags}
+                    onChange={(newValue) => setSelectedTags(newValue as { label: string, value: string }[])}
+                    className="text-sm"
                 />
             </div>
 

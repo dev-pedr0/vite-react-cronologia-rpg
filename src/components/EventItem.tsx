@@ -1,10 +1,18 @@
 import type { EventItem as EventItemType } from '../models/Event'
+import * as Icons from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
+import { STANDARD_TAGS } from "../models/Tags";
+import React from 'react';
 
 type Props = {
     event: EventItemType,
     onEdit: (event: EventItemType) => void,
     onDelete: (id: string) => void,
     onViewDetails: (event: EventItemType) => void,
+}
+
+function getTagMeta(tag: string) {
+    return STANDARD_TAGS.find(t => t.value.toLowerCase() === tag.toLocaleLowerCase());
 }
 
 export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Props) {
@@ -17,9 +25,21 @@ export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Pro
                     {' '} - {event.region}
                 </div>
                 <div>{event.description}</div>
+
                 {event.tags.length > 0 && (
-                    <div className='mt-1 text-sm text-gray-500'>
-                        Tags: {event.tags.join(', ')}
+                    <div className='mt-2 flex flex-wrap justify-center gap-2'>
+                        {event.tags.map((tag) => {
+                            const meta = getTagMeta(tag);
+                            const metaIcon = meta?.icon ? Icons[meta.icon as keyof typeof Icons] as LucideIcon : null;
+                            console.log("metaIcon:", metaIcon);
+                            return (
+                                <span key={tag} className='flex items-center px-2 py-1 rounded text-xs font-medium'
+                                style={{ backgroundColor: meta?.color ?? '#999', color: 'white' }}>
+                                    {metaIcon && React.createElement(metaIcon, { className: 'w-4 h-4 mr-1' })}
+                                    {meta?.label ?? tag}
+                                </span>
+                            );
+                        })}
                     </div>
                 )}
             </div>
