@@ -4,6 +4,7 @@ import EventList from './components/EventList'
 import Timeline from "./components/Timeline";
 import { useEventStore } from "./storage/useEventStore";
 import { ThemeProvider } from './contexts/ThemeContext';
+import ThemeSwitcher from './components/ThemeSwitcher';
 
 function App() {
   const [viewMode, setViewMode] = useState<'list' | 'timeline'>('list');
@@ -12,11 +13,24 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="mx-auto p-4 bg-gray-400">
+      <div
+        className="min-h-screen p-4"
+        style={{
+          backgroundColor: 'var(--color-bg-secondary)',
+          color: 'var(--color-text-primary)',
+        }}
+      >
+        <div className="flex justify-center mb-4">
+          <ThemeSwitcher />
+        </div>
         <div className="flex justify-center items-center mb-4">
           <button
             onClick={() => setViewMode(viewMode === 'list' ? 'timeline' : 'list')}
-            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+            className="px-4 py-2 rounded hover:opacity-90 font-bold"
+            style={{
+              backgroundColor: 'var(--color-bg-primary)',
+              color: 'var(--color-text-secondary)',
+            }}
           >
             Ver como {viewMode === 'list' ? 'Linha do Tempo' : 'Lista'}
           </button>

@@ -17,13 +17,18 @@ export default function Timeline({ events }: Props) {
     const sortedEvents = [...events].sort((a, b) => a.startYear - b.startYear);
 
     return (
-        <div className="overflow-x-auto p-8 border bg-gray-50">
+        <div 
+        className="overflow-x-auto p-8 border"
+        style={{ backgroundColor: 'var(--color-bg-secondary)'}}
+        >
             <div
                 className="relative min-h-[500px]"
                 style={{ width: `${timelineWidth}px` }}
             >
 
-                <div className="absolute top-1/2 left-0 right-0 h-1 bg-black z-0" />
+                <div className="absolute top-1/2 left-0 right-0 h-1 z-0" 
+                style={{ backgroundColor: 'var(--color-bg-primary)' }}
+                />
 
                 {sortedEvents.map((event, index) => {
                     const isEven = index % 2 === 0;
@@ -38,11 +43,13 @@ export default function Timeline({ events }: Props) {
                     return (
                         <motion.div
                         key={event.id}
-                        className="absolute z-10 w-56 mx-4 p-4 bg-white text-black rounded shadow cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300"
+                        className="absolute z-10 w-56 mx-4 p-4 rounded shadow cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300"
                         style={{
-                            left: `${index * 260}px`,
-                            transform: "translateY(-50%)",
-                            ...positionStyle,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary)',
+                        left: `${index * 260}px`,
+                        transform: 'translateY(-50%)',
+                        ...positionStyle,
                         }}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -51,11 +58,12 @@ export default function Timeline({ events }: Props) {
                         onClick={() => setSelectedEvent(event)}
                         >
                             <span
-                                className="absolute left-1/2 w-0.5 h-6 bg-black"
+                                className="absolute left-1/2 w-0.5 h-6"
                                 style={{
-                                    top: isEven ? "100%" : "auto",
-                                    bottom: isEven ? "auto" : "100%",
-                                    transform: "translateX(-50%)"
+                                    backgroundColor: 'var(--color-bg-primary)',
+                                    top: isEven ? '100%' : 'auto',
+                                    bottom: isEven ? 'auto' : '100%',
+                                    transform: 'translateX(-50%)',
                                 }}
                                 />
                             <div className="font-bold text-sm mb-1 break-words">

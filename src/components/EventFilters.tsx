@@ -39,7 +39,10 @@ export default function EventFilters({onChange}: Props) {
         setFilters((prev) => ({ ...prev, [name]: num }));
     }
     return (
-        <div className="p-4 bg-white rounded shadow mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div 
+        className="p-4 rounded shadow mb-4 grid grid-cols-1 md:grid-cols-3 gap-4"
+        style={{ backgroundColor: 'var(--color-bg-primary)', color: 'var(--color-text-secondary)' }}
+        >
            <div>
                 <label className="block text-sm font-medium">Ano inicial</label>
                 <input

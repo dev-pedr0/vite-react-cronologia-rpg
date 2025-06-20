@@ -17,7 +17,8 @@ function getTagMeta(tag: string) {
 
 export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Props) {
     return (
-        <div className='border rouded p-3 mb-2 bg-white shadow flex-col justify-center items-center'>
+        <div className='border rouded p-3 mb-2 shadow flex-col justify-center items-center
+        bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]'>
             <div>
                 <div className="font-bold text-lg">
                     {event.startYear}
@@ -43,13 +44,15 @@ export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Pro
                     </div>
                 )}
             </div>
-            <div className='space-x-2'>
+            <div className='space-x-2 pt-2'>
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         onEdit(event);
                     }}
-                    className='px-2 py-1 bg-yellow-400 rounded hover:bg-yellow-500'>
+                    style={{ backgroundColor: 'var(--btn-edit-bg)' }}
+                    className='px-2 py-1 rounded hover:opacity-90 transition'
+                    >
                     Editar
                 </button>
                 <button
@@ -57,13 +60,19 @@ export default function EventItem ({event, onEdit, onDelete, onViewDetails}: Pro
                         e.stopPropagation();
                         onDelete(event.id);
                     }}
-                    className='mt-1 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600'>
+                    style={{ backgroundColor: 'var(--btn-delete-bg)' }}
+                    className='px-2 py-1 rounded hover:opacity-90 transition'
+                    >
                     Deletar
                 </button>
-                <button onClick={(e) => {
-                    e.stopPropagation();
-                    onViewDetails(event);
-                }} className='px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600'>
+                <button 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onViewDetails(event);
+                    }} 
+                    style={{ backgroundColor: 'var(--btn-details-bg)' }}
+                    className='px-2 py-1 rounded hover:opacity-90 transition'
+                    >
                     Detalhes
                 </button>
             </div>

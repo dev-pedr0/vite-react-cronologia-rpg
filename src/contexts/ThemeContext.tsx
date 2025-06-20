@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 type Theme = 'light' | 'dark' | 'human' | 'elf' | 'dwarf';
 
@@ -12,11 +12,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({children}: {children: ReactNode}) {
     const [theme, setTheme] = useState<Theme>('dark');
 
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
     return (
         <ThemeContext.Provider value={{theme, setTheme}}>
-            <div className={`theme-${theme}`}>
-                {children}
-            </div>
+            {children}
         </ThemeContext.Provider>
     )
 }

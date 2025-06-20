@@ -27,7 +27,10 @@ function SortableEventItem({event, onEdit, onDelete, onViewDetails}: {
   return (
     <div ref={setNodeRef} style={style} className="flex items-start mb-2">
       {}
-      <div {...attributes} {...listeners} className="w-4 h-4 bg-gray-300 rounded cursor-grab mt-3 mr-2">
+      <div {...attributes} {...listeners} 
+      className="w-4 h-4 rounded cursor-grab mt-3 mr-2"
+      style={{ backgroundColor: 'var(--color-bg-secondary)' }}
+      >
         <img src="/icons/hand-paper.svg" alt="Mover" className="w-5 h-5 opacity-70"/>
       </div>
       
@@ -172,13 +175,18 @@ export default function EventList() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 text-black">
+    <div className="max-w-2xl mx-auto p-4"
+    style={{ backgroundColor: 'var(--color-bg-secondary)', color: 'var(--color-text-secondary)' }}>
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Cronologia de Eventos</h1>
+        <h1 className="text-2xl font-bold"
+        style={{ color: 'var(--color-text-primary)' }}>
+          Cronologia de Eventos
+          </h1>
 
         <button
           onClick={handleAddNew}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          className="px-4 py-2 rounded hover:opacity-90 transition font-extrabold"
+          style={{ backgroundColor: 'var(--color-bg-primary)' }}
         >
           + Novo Evento
         </button>
@@ -211,11 +219,17 @@ export default function EventList() {
         </SortableContext>
       </DndContext>      
 
-      <button onClick={handleExport} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 ml-2">
+      <button onClick={handleExport} 
+      style={{ backgroundColor: 'var(--btn-details-bg)', color: 'var(--color-text-primary)' }}
+      className="font-bold px-4 py-2 mx-2 rounded hover:opacity-90 transition"
+      >
           Exportar eventos
       </button>
 
-      <label className="ml-1 cursor-pointer px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+      <label 
+      className="font-bold mx-2 cursor-pointer px-4 py-2 rounded hover:opacity-90 transition"
+      style={{ backgroundColor: 'var(--btn-edit-bg)', color: 'var(--color-text-primary)' }}
+      >
         Importar eventos
         <input
           type="file"
@@ -231,7 +245,8 @@ export default function EventList() {
             clearEvents();
           }
         }}
-        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 ml-2"
+        style={{ backgroundColor: 'var(--btn-delete-bg)', color: 'var(--color-text-primary)' }}
+        className="mx-2 px-4 py-2 rounded hover:opacity-90 transition font-bold"
       >
         Limpar Tudo
       </button>
