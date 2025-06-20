@@ -5,10 +5,13 @@ import Timeline from "./components/Timeline";
 import { useEventStore } from "./storage/useEventStore";
 import { ThemeProvider } from './contexts/ThemeContext';
 import ThemeSwitcher from './components/ThemeSwitcher';
+import type { FilterOptions } from './components/EventFilters';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [viewMode, setViewMode] = useState<'list' | 'timeline'>('list');
-  
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [filters, setFilters] = useState<FilterOptions>({});
   const events = useEventStore((state) => state.events);
 
   return (
@@ -20,27 +23,40 @@ function App() {
           color: 'var(--color-text-primary)',
         }}
       >
+        {!sidebarOpen && (
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="fixed top-4 left-4 z-50 bg-gray-800 text-white px-3 py-2 rounded"
+            style={{
+              backgroundColor: 'var(--color-bg-secondary)',
+              color: 'var(--color-text-primary)',
+            }}
+          >
+            &#9776;
+          </button>
+        )}
+
         <div className="flex justify-center mb-4">
           <ThemeSwitcher />
         </div>
-        <div className="flex justify-center items-center mb-4">
-          <button
-            onClick={() => setViewMode(viewMode === 'list' ? 'timeline' : 'list')}
-            className="px-4 py-2 rounded hover:opacity-90 font-bold"
-            style={{
-              backgroundColor: 'var(--color-bg-primary)',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            Ver como {viewMode === 'list' ? 'Linha do Tempo' : 'Lista'}
-          </button>
-        </div>
 
         {viewMode === 'list' ? (
-          <EventList />
+          <EventList filters={filters}/>
         ) : (
           <Timeline events={events} />
         )}
+
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          viewMode={viewMode}
+          toggleViewMode={() =>
+            setViewMode(viewMode === 'list' ? 'timeline' : 'list')
+          }
+          filters={filters}
+          setFilters={setFilters}
+        />
+        
       </div>
     </ThemeProvider>
   );

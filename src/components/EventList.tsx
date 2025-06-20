@@ -4,7 +4,6 @@ import type { EventItem as EventItemType } from '../models/Event';
 import EventItem from "./EventItem";
 import EventForm from "./EventForm";
 import type { FilterOptions } from "./EventFilters";
-import EventFilters from "./EventFilters";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, type DragEndEvent, } from "@dnd-kit/core";
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy, } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -42,18 +41,20 @@ function SortableEventItem({event, onEdit, onDelete, onViewDetails}: {
   );
 }
 
-export default function EventList() {
+type EventListProps = {
+  filters: FilterOptions;
+};
+
+export default function EventList({ filters }: EventListProps) {
   const events = useEventStore((state) => state.events);
   const addEvent = useEventStore((state) => state.addEvent);
   const updateEvent = useEventStore((state) => state.updateEvent);
   const deleteEvent = useEventStore((state) => state.deleteEvent);
-  const [viewingEvent, setViewingEvent] = useState<EventItemType | null>(null);
-
-  const [editingEvent, setEditingEvent] = useState<EventItemType | null>(null)
-  const [showForm, setShowForm] = useState(false);
-  const [filters, setFilters] = useState<FilterOptions>({});
-
   const clearEvents = useEventStore((state) => state.clearEvents);
+
+  const [viewingEvent, setViewingEvent] = useState<EventItemType | null>(null);
+  const [editingEvent, setEditingEvent] = useState<EventItemType | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   function applyFilters(event: EventItemType): boolean {
     const {
@@ -64,21 +65,21 @@ export default function EventList() {
       tag,
     } = filters;
 
-    if (startYear !== undefined && event.startYear < startYear) return false
-    if (endYear !== undefined && (event.endYear ?? event.startYear) > endYear) return false
-    if (region && !event.region.toLowerCase().includes(region.toLowerCase())) return false
-    if (description && !event.description.toLowerCase().includes(description.toLowerCase())) return false
-    if (tag && !event.tags.some((t) => t.toLowerCase().includes(tag.toLowerCase()))) return false
+    if (startYear !== undefined && event.startYear < startYear) return false;
+    if (endYear !== undefined && (event.endYear ?? event.startYear) > endYear) return false;
+    if (region && !event.region.toLowerCase().includes(region.toLowerCase())) return false;
+    if (description && !event.description.toLowerCase().includes(description.toLowerCase())) return false;
+    if (tag && !event.tags.some((t) => t.toLowerCase().includes(tag.toLowerCase()))) return false;
 
-    return true
+    return true;
   }
 
   const filtered = [...events].filter(applyFilters);
 
   if (filters.sortOrder === 'desc') {
-    filtered.sort((a, b) => (b.startYear ?? 0) - (a.startYear ?? 0))
+    filtered.sort((a, b) => (b.startYear ?? 0) - (a.startYear ?? 0));
   } else {
-    filtered.sort((a, b) => (a.startYear ?? 0) - (b.startYear ?? 0))
+    filtered.sort((a, b) => (a.startYear ?? 0) - (b.startYear ?? 0));
   }
 
   const sensors = useSensors(useSensor(PointerSensor));
@@ -109,37 +110,37 @@ export default function EventList() {
     }
 
     if (newYear !== moved.startYear) {
-      updateEvent({...moved, startYear: newYear});
+      updateEvent({ ...moved, startYear: newYear });
     }
   }
 
   function handleSave(event: EventItemType) {
-      if (editingEvent) {
-          updateEvent(event);
-      } else {
-          addEvent(event);
-      }
-      setShowForm(false);
-      setEditingEvent(null);
+    if (editingEvent) {
+      updateEvent(event);
+    } else {
+      addEvent(event);
+    }
+    setShowForm(false);
+    setEditingEvent(null);
   }
 
   function handleCancel() {
-      setShowForm(false)
-      setEditingEvent(null)
+    setShowForm(false);
+    setEditingEvent(null);
   }
 
   function handleEdit(event: EventItemType) {
-      setEditingEvent(event)
-      setShowForm(true)
+    setEditingEvent(event);
+    setShowForm(true);
   }
 
   function handleAddNew() {
-      setEditingEvent(null)
-      setShowForm(true)
+    setEditingEvent(null);
+    setShowForm(true);
   }
 
   function handleExport() {
-    const blob = new Blob([JSON.stringify(events, null, 2)], {type: 'application/json'});
+    const blob = new Blob([JSON.stringify(events, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
@@ -159,8 +160,8 @@ export default function EventList() {
       try {
         const imported = JSON.parse(event.target?.result as string);
         if (Array.isArray(imported)) {
-          imported.forEach((ev:any) => {
-            const newEvent = {...ev, id: crypto.randomUUID()}
+          imported.forEach((ev: any) => {
+            const newEvent = { ...ev, id: crypto.randomUUID() };
             addEvent(newEvent);
           });
           alert('Eventos importados com sucesso!');
@@ -168,20 +169,24 @@ export default function EventList() {
           alert('Arquivo inválido.');
         }
       } catch {
-        alert('Erro ao importar arquivo.')
+        alert('Erro ao importar arquivo.');
       }
-    }
+    };
     reader.readAsText(file);
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4"
-    style={{ backgroundColor: 'var(--color-bg-secondary)', color: 'var(--color-text-secondary)' }}>
+    <div
+      className="max-w-2xl mx-auto p-4"
+      style={{ backgroundColor: 'var(--color-bg-secondary)', color: 'var(--color-text-secondary)' }}
+    >
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold"
-        style={{ color: 'var(--color-text-primary)' }}>
+        <h1
+          className="text-2xl font-bold"
+          style={{ color: 'var(--color-text-primary)' }}
+        >
           Cronologia de Eventos
-          </h1>
+        </h1>
 
         <button
           onClick={handleAddNew}
@@ -191,8 +196,6 @@ export default function EventList() {
           + Novo Evento
         </button>
       </div>
-
-      <EventFilters onChange={setFilters} />
 
       {showForm && (
         <EventForm
@@ -217,18 +220,19 @@ export default function EventList() {
             ))}
           </div>
         </SortableContext>
-      </DndContext>      
+      </DndContext>
 
-      <button onClick={handleExport} 
-      style={{ backgroundColor: 'var(--btn-details-bg)', color: 'var(--color-text-primary)' }}
-      className="font-bold px-4 py-2 mx-2 rounded hover:opacity-90 transition"
+      <button
+        onClick={handleExport}
+        style={{ backgroundColor: 'var(--btn-details-bg)', color: 'var(--color-text-primary)' }}
+        className="font-bold px-4 py-2 mx-2 rounded hover:opacity-90 transition"
       >
-          Exportar eventos
+        Exportar eventos
       </button>
 
-      <label 
-      className="font-bold mx-2 cursor-pointer px-4 py-2 rounded hover:opacity-90 transition"
-      style={{ backgroundColor: 'var(--btn-edit-bg)', color: 'var(--color-text-primary)' }}
+      <label
+        className="font-bold mx-2 cursor-pointer px-4 py-2 rounded hover:opacity-90 transition"
+        style={{ backgroundColor: 'var(--btn-edit-bg)', color: 'var(--color-text-primary)' }}
       >
         Importar eventos
         <input
@@ -252,8 +256,8 @@ export default function EventList() {
       </button>
 
       {viewingEvent && (
-        <EventDetailsModal event={viewingEvent} onClose={() => setViewingEvent(null)}/>
+        <EventDetailsModal event={viewingEvent} onClose={() => setViewingEvent(null)} />
       )}
     </div>
-  )
+  );
 }

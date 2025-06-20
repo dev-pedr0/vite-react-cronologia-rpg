@@ -12,9 +12,10 @@ export type FilterOptions = {
 
 type Props = {
     onChange: (filters: FilterOptions) => void;
+    layout?: 'grid' | 'stack';
 }
 
-export default function EventFilters({onChange}: Props) {
+export default function EventFilters({onChange, layout}: Props) {
     const [filters, setFilters] = useState<FilterOptions>({
         sortOrder: 'asc',
     });
@@ -40,7 +41,9 @@ export default function EventFilters({onChange}: Props) {
     }
     return (
         <div 
-        className="p-4 rounded shadow mb-4 grid grid-cols-1 md:grid-cols-3 gap-4"
+        className={`p-4 rounded shadow mb-4 ${
+            layout === 'stack' ? 'flex flex-col gap-4' : 'grid grid-cols-1 md:grid-cols-3 gap-4'
+        }`}
         style={{ backgroundColor: 'var(--color-bg-primary)', color: 'var(--color-text-secondary)' }}
         >
            <div>
@@ -62,7 +65,7 @@ export default function EventFilters({onChange}: Props) {
             <div>
                 <label className="block text-sm font-medium">Região</label>
                 <select
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)]"
                     value={filters.region || ''}
                     onChange={(e) => setFilters({ ...filters, region: e.target.value || undefined })}
                     >
@@ -75,7 +78,7 @@ export default function EventFilters({onChange}: Props) {
             <div>
             <label className="block text-sm font-medium">Tag</label>
             <select
-                className="border p-2 rounded"
+                className="border p-2 rounded bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)]"
                 value={filters.tag || ''}
                 onChange={(e) =>
                 setFilters({ ...filters, tag: e.target.value || undefined })
@@ -107,7 +110,7 @@ export default function EventFilters({onChange}: Props) {
                 onChange={(e) =>
                     setFilters((prev) => ({ ...prev, sortOrder: e.target.value as 'asc' | 'desc' }))
                 }
-                className="w-full border px-2 py-1 rounded"
+                className="w-full border px-2 py-1 rounded bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)]"
                 >
                 <option value="asc">Mais antigo → Mais recente</option>
                 <option value="desc">Mais recente → Mais antigo</option>

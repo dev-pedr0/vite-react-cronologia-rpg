@@ -28,6 +28,7 @@ button:hover {
 [data-theme="light"] {
   --color-bg-primary: #FBFBFB;
   --color-bg-secondary: #C4D9FF;
+  --color-bg-terciary:#8694af;
 
   --color-text-primary: #393E46;
   --color-text-secondary: #a28fff;
@@ -43,6 +44,7 @@ button:hover {
 [data-theme="dark"] {
   --color-bg-primary: #222831;
   --color-bg-secondary: #948979;
+  --color-bg-terciary: #424d5e;
 
   --color-text-primary: #E8F9FF;
   --color-text-secondary: #DFD0B8;
@@ -58,6 +60,7 @@ button:hover {
 [data-theme="human"] {
   --color-bg-primary: #232438;
   --color-bg-secondary: #2E4240;
+  --color-bg-terciary: #59807c;
 
   --color-text-primary: #E8F9FF;
   --color-text-secondary: #6c9994;
@@ -74,6 +77,7 @@ button:hover {
 [data-theme="elf"] {
   --color-bg-primary: #606f7e;
   --color-bg-secondary: #396346;
+  --color-bg-terciary: rgb(118, 168, 163);
 
   --color-text-primary: #E8F9FF;
   --color-text-secondary: #223528;
@@ -89,6 +93,7 @@ button:hover {
 [data-theme="dwarf"] {
   --color-bg-primary: #61372F;
   --color-bg-secondary: #924B03;
+  --color-bg-terciary: #633100;
 
   --color-text-primary: #E8F9FF;
   --color-text-secondary: #2e1c09;
