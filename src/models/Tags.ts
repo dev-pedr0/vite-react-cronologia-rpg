@@ -23,3 +23,7 @@ export const STANDARD_TAGS: TagDefinition[] = [
     { label: "Morte", value: "Morte", color: "#000000", icon: "Skull" },
     { label: "Magia", value: "Magia", color: "#8A2BE2", icon: "Sparkles" },
 ];
+
+export function getTagMeta(tag: string) {
+  return STANDARD_TAGS.find(t => t.value.toLowerCase() === tag.toLowerCase());
+}
