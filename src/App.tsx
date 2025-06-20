@@ -10,7 +10,7 @@ function App() {
   const events = useEventStore((state) => state.events);
 
   return (
-    <div className="max-w-5xl mx-auto p-4 bg-gray-400">
+    <div className="mx-auto p-4 bg-gray-400">
       <div className="flex justify-center items-center mb-4">
         <button
           onClick={() => setViewMode(viewMode === 'list' ? 'timeline' : 'list')}
