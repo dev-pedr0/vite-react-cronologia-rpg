@@ -58,8 +58,8 @@ button:hover {
 }
 
 [data-theme="human"] {
-  --color-bg-primary: #232438;
-  --color-bg-secondary: #2E4240;
+  --color-bg-primary: #234441;
+  --color-bg-secondary: #232438;
   --color-bg-terciary: #59807c;
 
   --color-text-primary: #E8F9FF;

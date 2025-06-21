@@ -52,7 +52,12 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
     }
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 border rounded bg-white shadow max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="p-4 border rounded shadow max-w-md mx-auto"
+        style={{
+          backgroundColor: 'var(--color-bg-primary)',
+          color: 'var(--color-text-primary)',
+        }}
+        >
             <div className="mb-2">
                 <label className="block font-semibold">Ano Inicial</label>
                 <input type="number" value={startYear} onChange={(e) => setStartYear(Number(e.target.value))} className="w-full border px-2 py-1 rounded" required/>
@@ -66,7 +71,7 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
                     const val = e.target.value
                     setEndYear(val === '' ? undefined : Number(val))
                 }}
-                className="w-full border px-2 py-1 rounded"
+              className="w-full border px-2 py-1 rounded"
             />
             </div>
 
@@ -92,21 +97,75 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
             </div>
 
             <div className="mb-2">
-                <label className="block font-semibold mb-1">Tags</label>
+                <label className="block font-semibold mb-1">
+                    Tags
+                </label>
                 <CreatableSelect
                     isMulti
                     options={tagOptions}
                     value={selectedTags}
                     onChange={(newValue) => setSelectedTags(newValue as { label: string, value: string }[])}
                     className="text-sm"
+                    styles={{
+                        control: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        menu: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        option: (base, state) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        multiValue: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        multiValueLabel: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        multiValueRemove: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        singleValue: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                        input: (base) => ({
+                        ...base,
+                        backgroundColor: 'var(--color-bg-primary)',
+                        color: 'var(--color-text-primary',
+                        }),
+                    }}
                 />
             </div>
 
             <div className="flex justify-end space-x-2">
-                <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-300 rounded">
+                <button type="button" onClick={onCancel} className="px-4 py-2 rounded"
+                style={{
+                    backgroundColor: 'var(--btn-delete-bg)',
+                    color: 'var(--color-text-primary)'
+                }}
+                >
                     Cancelar
                 </button>
-                <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+                <button type="submit" className="px-4 py-2 rounded"
+                style={{
+                    backgroundColor: 'var(--btn-details-bg)',
+                    color: 'var(--color-text-primary)'
+                }}
+                >
                     Salvar
                 </button>
             </div>

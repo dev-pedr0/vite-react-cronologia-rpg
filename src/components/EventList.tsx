@@ -197,30 +197,42 @@ export default function EventList({ filters }: EventListProps) {
         </button>
       </div>
 
-      {showForm && (
+      {showForm && !editingEvent && (
+      <div className="my-4">
         <EventForm
-          eventToEdit={editingEvent ?? undefined}
           onSave={handleSave}
           onCancel={handleCancel}
         />
-      )}
+      </div>
+    )}
 
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={filtered.map((e) => e.id)} strategy={verticalListSortingStrategy}>
-          <div className="mt-4">
-            {filtered.length === 0 && <p>Nenhum evento encontrado.</p>}
-            {filtered.map((event) => (
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={filtered.map((e) => e.id)} strategy={verticalListSortingStrategy}>
+        <div className="mt-4">
+          {filtered.length === 0 && <p>Nenhum evento encontrado.</p>}
+          {filtered.map((event) => (
+            <div key={event.id} className="mb-4">
               <SortableEventItem
-                key={event.id}
                 event={event}
                 onEdit={handleEdit}
                 onDelete={deleteEvent}
                 onViewDetails={setViewingEvent}
               />
-            ))}
-          </div>
-        </SortableContext>
-      </DndContext>
+
+              {showForm && editingEvent?.id === event.id && (
+                <div className="my-2">
+                  <EventForm
+                    eventToEdit={editingEvent}
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
 
       <button
         onClick={handleExport}

@@ -39,6 +39,11 @@ export default function EventFilters({onChange, layout}: Props) {
         const num = value.trim() === '' ? undefined : Number(value);
         setFilters((prev) => ({ ...prev, [name]: num }));
     }
+
+    function handleClearFilters() {
+        setFilters({ sortOrder: 'asc' });
+    }
+
     return (
         <div 
         className={`p-4 rounded shadow mb-4 ${
@@ -50,6 +55,7 @@ export default function EventFilters({onChange, layout}: Props) {
                 <label className="block text-sm font-medium">Ano inicial</label>
                 <input
                 type="number"
+                value={filters.startYear || ''}
                 onChange={(e) => handleNumberChange('startYear', e.target.value)}
                 className="w-full border px-2 py-1 rounded"
                 />
@@ -58,6 +64,7 @@ export default function EventFilters({onChange, layout}: Props) {
                 <label className="block text-sm font-medium">Ano final</label>
                 <input
                 type="number"
+                value={filters.endYear || ''}
                 onChange={(e) => handleNumberChange('endYear', e.target.value)}
                 className="w-full border px-2 py-1 rounded"
                 />
@@ -115,6 +122,19 @@ export default function EventFilters({onChange, layout}: Props) {
                 <option value="asc">Mais antigo → Mais recente</option>
                 <option value="desc">Mais recente → Mais antigo</option>
                 </select>
+            </div>
+
+            <div className={layout === 'stack' ? 'mt-2' : 'md:col-span-3 mt-2'}>
+                <button
+                onClick={handleClearFilters}
+                className="px-4 py-2 rounded font-semibold hover:opacity-90 transition"
+                style={{
+                    backgroundColor: 'var(--btn-delete-bg)',
+                    color: 'var(--color-text-primary)',
+                }}
+                >
+                Limpar filtros
+                </button>
             </div> 
         </div>
     );
