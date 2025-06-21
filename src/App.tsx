@@ -7,6 +7,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import type { FilterOptions } from './components/EventFilters';
 import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 function App() {
   const [viewMode, setViewMode] = useState<'list' | 'timeline'>('list');
@@ -58,6 +59,7 @@ function App() {
         />
         
       </div>
+      <Footer/>
     </ThemeProvider>
   );
 }
