@@ -13,7 +13,6 @@ type SidebarProps = {
 export default function Sidebar({
   isOpen,
   onClose,
-  filters,
   setFilters,
   viewMode,
   toggleViewMode,

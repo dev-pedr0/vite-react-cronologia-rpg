@@ -28,12 +28,12 @@ export default function EventFilters({onChange, layout}: Props) {
     const uniqueRegions = Array.from(new Set(events.map(e => e.region))).sort()
     const uniqueTags = Array.from(new Set(events.flatMap(e => e.tags))).sort()
 
-    function handleInputChange(name: keyof FilterOptions, value: string) {
+    /*function handleInputChange(name: keyof FilterOptions, value: string) {
         setFilters((prev) => ({
             ...prev,
             [name]: value.trim() === '' ? undefined : value
         }));
-    }
+    }*/
 
     function handleNumberChange(name: keyof FilterOptions, value: string) {
         const num = value.trim() === '' ? undefined : Number(value);

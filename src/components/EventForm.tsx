@@ -117,7 +117,7 @@ export default function EventForm({onSave, onCancel, eventToEdit}: Props){
                         backgroundColor: 'var(--color-bg-primary)',
                         color: 'var(--color-text-primary',
                         }),
-                        option: (base, state) => ({
+                        option: (base) => ({
                         ...base,
                         backgroundColor: 'var(--color-bg-primary)',
                         color: 'var(--color-text-primary',
