@@ -1,0 +1,57 @@
+[
+    {
+        "id": "de1f820b-fb8b-4fd5-85d0-cf2bd9d8aa01",
+        "startYear": -300,
+        "region": "Cinquedras",
+        "description": "Alvorada dos Cristais: primeiras manifestações de energia mágica em fendas cristalinas nas montanhas de Cinquedras",
+        "tags": [
+            "Magia",
+            "Descoberta"
+        ]
+    },
+    {
+        "id": "f1b2c3d4-e5f6-47a8-a9d1-9c2e71876c9f",
+        "startYear": 0,
+        "region": "Cinquedras",
+        "description": "Convergência dos Povos: tratado entre anões, elfos e humanos após a Grande Sombra",
+        "tags": [
+            "Política",
+            "Fundação",
+            "Aliança"
+        ]
+    },
+    {
+        "id": "a9b8c7d6-e5f4-4321-8abc-12de345f6789",
+        "startYear": 250,
+        "endYear": 270,
+        "region": "Sularo Liber",
+        "description": "Navegação Escarlate: expedição halfling descobre as Ilhas Nebulosas e retorna com relatos de monstros marinhos e uma ilha flutuante",
+        "tags": [
+            "Exploração",
+            "Halflings",
+            "Mistério"
+        ]
+    },
+    {
+        "id": "99ac3e21-4a47-4ad1-b314-4fd4f204e0cb",
+        "startYear": 400,
+        "region": "Cinquedras",
+        "description": "Ascensão de Thahmir: um orc pacifista funda a Irmandade de Sangue Silente, pregando união entre raças",
+        "tags": [
+            "Orcs",
+            "Política",
+            "Religião"
+        ]
+    },
+    {
+        "id": "2a1c3e4f-8b9a-4a1b-812f-4e5f1a6b9e7d",
+        "startYear": 700,
+        "region": "Sularo Liber",
+        "description": "Fragmentação do Véu: experimento arcano falha e provoca um rasgo entre planos, liberando espíritos ancestrais no continente",
+        "tags": [
+            "Magia",
+            "Desastre",
+            "Espiritual"
+        ]
+    }
+]
