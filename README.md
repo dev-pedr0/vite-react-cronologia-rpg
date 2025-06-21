@@ -1,82 +1,32 @@
-# Cronologia Fantástica
-Um visualizador interativo de eventos históricos de mundos de fantasia
+# 🗺️ Cronologia Fantástica
 
-Este projeto permite criar, visualizar e filtrar eventos em uma linha do tempo fictícia, ideal para mundos de fantasia em desenvolvimento, como campanhas de RPG ou romances. O usuário pode filtrar por ano, região, tags, etc.
+Um visualizador interativo de eventos históricos para mundos de fantasia.  
+Ideal para escritores, mestres de RPG e criadores de mundos fictícios.
 
-## Funcionalidades
-- Criação de Eventos
-- Filtragem por ano, região, descrição e tags
-- Ordenação cronológica dos eventos
-- Interface adaptável (responsiva)
-- Botão de limpar filtros
-- Modo linha do tempo
+Este projeto permite criar, visualizar e filtrar eventos em uma linha do tempo fictícia, com foco em organização narrativa e construção de lore.
 
-## Tecnologias
+## ✨ Funcionalidades
+- ✅ Criação e exibição de eventos
+- 🎯 Filtros por ano, região, descrição e tags
+- ⏳ Ordenação cronológica (asc/desc)
+- 📱 Interface responsiva
+- 🧼 Botão de limpar filtros
+- 📜 Modo linha do tempo vertical
+
+## 🛠 Tecnologias
 - React + Vite
 - TypeScript
 - Tailwind CSS
-- Zustand (para gerenciamento de estado)
-- Lucide (para utilização de ícones)
-- Drag and drop kit
-- Framer motion
+- Zustand (gerenciamento de estado)
+- Lucide (ícones)
+- Drag and Drop Kit
+- Framer Motion
 
-## Como rodar localmente
+## 🚀 Como rodar localmente
+
+```bash
 git clone https://github.com/dev-pedr0/vite-react-cronologia-rpg
+cd vite-react-cronologia-rpg
 npm install
 npm run dev
-Importe o arquivo evetons_demo.json caso queria eventos para testar o site
-
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+📄 [Baixar eventos_demo.json](/eventos_demo.json)
