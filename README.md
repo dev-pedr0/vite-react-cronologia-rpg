@@ -1,3 +1,31 @@
+# Cronologia Fantástica
+Um visualizador interativo de eventos históricos de mundos de fantasia
+
+Este projeto permite criar, visualizar e filtrar eventos em uma linha do tempo fictícia, ideal para mundos de fantasia em desenvolvimento, como campanhas de RPG ou romances. O usuário pode filtrar por ano, região, tags, etc.
+
+## Funcionalidades
+- Criação de Eventos
+- Filtragem por ano, região, descrição e tags
+- Ordenação cronológica dos eventos
+- Interface adaptável (responsiva)
+- Botão de limpar filtros
+- Modo linha do tempo
+
+## Tecnologias
+- React + Vite
+- TypeScript
+- Tailwind CSS
+- Zustand (para gerenciamento de estado)
+- Lucide (para utilização de ícones)
+- Drag and drop kit
+- Framer motion
+
+## Como rodar localmente
+git clone https://github.com/dev-pedr0/vite-react-cronologia-rpg
+npm install
+npm run dev
+Importe o arquivo evetons_demo.json caso queria eventos para testar o site
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
