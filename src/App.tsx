@@ -44,7 +44,7 @@ function App() {
         {viewMode === 'list' ? (
           <EventList filters={filters}/>
         ) : (
-          <Timeline events={events} />
+          <Timeline events={events} filters={filters} />
         )}
 
         <Sidebar

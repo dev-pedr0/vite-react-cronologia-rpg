@@ -13,27 +13,24 @@ export type FilterOptions = {
 type Props = {
     onChange: (filters: FilterOptions) => void;
     layout?: 'grid' | 'stack';
+    filters: FilterOptions;
 }
 
-export default function EventFilters({onChange, layout}: Props) {
-    const [filters, setFilters] = useState<FilterOptions>({
-        sortOrder: 'asc',
-    });
+export default function EventFilters({onChange, layout, filters: externalFilters}: Props) {
+    const [filters, setFilters] = useState<FilterOptions>(externalFilters);
 
     useEffect(() => {
-        onChange(filters)
+        setFilters(externalFilters);
+    }, [externalFilters]);
+
+
+    useEffect(() => {
+        onChange(filters);
     }, [filters]);
 
     const events = useEventStore((state) => state.events)
     const uniqueRegions = Array.from(new Set(events.map(e => e.region))).sort()
     const uniqueTags = Array.from(new Set(events.flatMap(e => e.tags))).sort()
-
-    /*function handleInputChange(name: keyof FilterOptions, value: string) {
-        setFilters((prev) => ({
-            ...prev,
-            [name]: value.trim() === '' ? undefined : value
-        }));
-    }*/
 
     function handleNumberChange(name: keyof FilterOptions, value: string) {
         const num = value.trim() === '' ? undefined : Number(value);

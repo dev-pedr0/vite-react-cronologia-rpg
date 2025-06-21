@@ -13,6 +13,7 @@ type SidebarProps = {
 export default function Sidebar({
   isOpen,
   onClose,
+  filters,
   setFilters,
   viewMode,
   toggleViewMode,
@@ -55,7 +56,7 @@ export default function Sidebar({
           Ver como {viewMode === 'list' ? 'Linha do Tempo' : 'Lista'}
         </button>
 
-        <EventFilters onChange={setFilters} layout="stack"/>
+        <EventFilters onChange={setFilters} layout="stack" filters={filters}/>
       </div>
     </div>
   );

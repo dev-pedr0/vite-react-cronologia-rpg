@@ -25,7 +25,6 @@ function SortableEventItem({event, onEdit, onDelete, onViewDetails}: {
 
   return (
     <div ref={setNodeRef} style={style} className="flex items-start mb-2">
-      {}
       <div {...attributes} {...listeners} 
       className="w-4 h-4 rounded cursor-grab mt-3 mr-2"
       style={{ backgroundColor: 'var(--color-bg-secondary)' }}
@@ -33,7 +32,6 @@ function SortableEventItem({event, onEdit, onDelete, onViewDetails}: {
         <img src="/icons/hand-paper.svg" alt="Mover" className="w-5 h-5 opacity-70"/>
       </div>
       
-      {}
       <div className="flex-1">
         <EventItem event={event} onEdit={onEdit} onDelete={onDelete} onViewDetails={onViewDetails}/>
       </div>

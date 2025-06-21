@@ -5,22 +5,48 @@ import * as Icons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 import EventDetailsModal from "./EventDetailsModal";
+import type { FilterOptions } from "./EventFilters";
 
 type Props = {
     events: EventItem[];
+    filters: FilterOptions;
 };
 
-export default function Timeline({ events }: Props) {
+export default function Timeline({ events, filters }: Props) {
     const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
     const timelineWidth = events.length * 260;
 
-    const sortedEvents = [...events].sort((a, b) => a.startYear - b.startYear);
+    const filteredEvents = events.filter((event) => {
+        const {
+            startYear,
+            endYear,
+            region,
+            description,
+            tag,
+        } = filters;
+
+        if (startYear && event.startYear < startYear) return false;
+        if (endYear && (event.endYear ?? event.startYear) > endYear) return false;
+        if (region && event.region !== region) return false;
+        if (description && !event.description.toLowerCase().includes(description.toLowerCase())) return false;
+        if (tag && !event.tags.includes(tag)) return false;
+
+        return true;
+    });
+
+    const sortedEvents = [...filteredEvents].sort((a, b) => {
+        if (filters.sortOrder === 'desc') {
+            return (b.startYear ?? 0) - (a.startYear ?? 0);
+        }
+        return (a.startYear ?? 0) - (b.startYear ?? 0);
+    });
 
     return (
         <div 
         className="overflow-x-auto p-8 border"
         style={{ backgroundColor: 'var(--color-bg-secondary)'}}
         >
+            <h1>Linha do Tempo</h1>
             <div
                 className="relative min-h-[500px]"
                 style={{ width: `${timelineWidth}px` }}
