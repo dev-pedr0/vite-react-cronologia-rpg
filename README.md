@@ -24,8 +24,6 @@ Este projeto permite criar, visualizar e filtrar eventos em uma linha do tempo f
 
 ## 🚀 Como rodar localmente
 
-## 🚀 Como rodar localmente
-
 ```bash
 git clone https://github.com/dev-pedr0/vite-react-cronologia-rpg
 cd vite-react-cronologia-rpg
