@@ -5,6 +5,9 @@ Ideal para escritores, mestres de RPG e criadores de mundos fictícios.
 
 Este projeto permite criar, visualizar e filtrar eventos em uma linha do tempo fictícia, com foco em organização narrativa e construção de lore.
 
+## 💻 Acesse o site
+[Acesse o site e curta a vontade](https://cronologia-rpg.vercel.app)
+
 ## ✨ Funcionalidades
 - ✅ Criação e exibição de eventos
 - 🎯 Filtros por ano, região, descrição e tags
