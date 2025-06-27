@@ -173,6 +173,25 @@ export default function EventList({ filters }: EventListProps) {
     reader.readAsText(file);
   }
 
+  function handleImportDemo() {
+    fetch('/public/eventos_demo.json')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          data.forEach((ev: any) => {
+            const newEvent = {...ev, id: crypto.randomUUID()};
+            addEvent(newEvent);
+          });
+          alert('Demo importada com sucesso!');
+        } else {
+          alert('Arquivo de demo inválido.');
+        }
+      })
+      .catch(() => {
+        alert('Erro ao importar a demo.');
+      });
+  }
+
   return (
     <div
       className="max-w-2xl mx-auto p-4"
@@ -252,6 +271,14 @@ export default function EventList({ filters }: EventListProps) {
           className="hidden"
         />
       </label>
+
+      <button
+      onClick={handleImportDemo}
+      className="font-bold px-4 py-2 mx-2 rounded hover:opacity-90 transition"
+      style={{ backgroundColor: 'var(--btn-edit-bg)', color: 'var(--color-text-primary)' }}
+      >
+        Importar Demo
+      </button>
 
       <button
         onClick={() => {
