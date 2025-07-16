@@ -174,7 +174,7 @@ export default function EventList({ filters }: EventListProps) {
   }
 
   function handleImportDemo() {
-    fetch('/public/eventos_demo.json')
+    fetch('/eventos_demo.json')
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
